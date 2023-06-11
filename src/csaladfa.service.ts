@@ -8,6 +8,10 @@ export class CsaladfaService {
   getCsaladtagokByGeneracio(generacio: number): Observable<Csaladtag[]> {
     return of(csaladtagok.filter((cs: Csaladtag) => cs.generacio == generacio));
   }
+
+  hasGeneracio(generacio: number): Observable<boolean> {
+    return of(csaladtagok.some((cs: Csaladtag) => cs.generacio == generacio));
+  }
 }
 
 const csaladtagok: Csaladtag[] = [

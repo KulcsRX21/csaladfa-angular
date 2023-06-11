@@ -13,7 +13,9 @@ import { Csaladtag } from './csaladtag.model';
   template: `
     <div *ngIf="(csaladtagok$ | async) as csaladtagok; else loading" class="center">
       <csf-csaladtag *ngFor="let csaladtag of csaladtagok" [csaladtag]="csaladtag"/>
-    </div>
+      </div>
+      <csf-generacio *ngIf="(vanKovetkezoGeneracio$ | async)" [generacio]="generacio + 1"/>
+    
 
     <ng-template #loading>
       Jönnek a családtagok...
@@ -24,16 +26,22 @@ import { Csaladtag } from './csaladtag.model';
         display: flex;
         justify-content: center;
     }`,
-  ]
+  ],
 })
-export class GeneracioComponent implements OnInit {  
+export class GeneracioComponent implements OnInit {
   @Input({ required: true }) generacio!: number;
 
   csaladtagok$!: Observable<Csaladtag[]>;
+  vanKovetkezoGeneracio$!: Observable<boolean>;
 
   constructor(private csaladfaService: CsaladfaService) {}
 
   ngOnInit() {
-    this.csaladtagok$ = this.csaladfaService.getCsaladtagokByGeneracio(this.generacio);
+    this.csaladtagok$ = this.csaladfaService.getCsaladtagokByGeneracio(
+      this.generacio
+    );
+    this.vanKovetkezoGeneracio$ = this.csaladfaService.hasGeneracio(
+      this.generacio + 1
+    );
   }
 }

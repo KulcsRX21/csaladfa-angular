@@ -19,7 +19,7 @@ import { IsFerfiPipe } from './isFerfi.pipe';
         margin: 10px;
         padding: 10px;
         border-style: none;
-        border-radius: 20%;
+        border-radius: 10%;
         font-weight: bold;
       }
     `,
