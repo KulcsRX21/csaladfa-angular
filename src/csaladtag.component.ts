@@ -1,33 +1,33 @@
-import { NgIf } from '@angular/common';
+import { NgIf, NgStyle } from '@angular/common';
 import { Component, computed, Input, signal } from '@angular/core';
 
-import { Csaladtag } from './csaladtag.model';
+import { Csaladtag, Nem } from './csaladtag.model';
 
 @Component({
   selector: 'csf-csaladtag',
   standalone: true,
-  imports: [NgIf],
+  imports: [NgIf, NgStyle],
   template: `
-    <button>
-      {{ csaladtag.nev }} {{ nagyNev() }}
+    <button [ngStyle]="{'background-color': isFerfi ? 'blue' : '#FF1493' }" class="csaladtag">
+      {{ csaladtag.nev }} ({{ csaladtag.kor }})
     </button>
   `,
   styles: [
-    `.center {
-        display: flex;
-        justify-content: center;
-    }`,
+    `.csaladtag {
+        color: white;
+        margin: 10px;
+        padding: 10px;
+        border-style: none;
+        border-radius: 20%;
+        font-weight: bold;
+      }
+    `,
   ],
 })
 export class CsaladtagComponent {
-  get csaladtag() { return this._csaladtag()! }
-  
-  private _csaladtag = signal<Csaladtag | undefined>(undefined);
-  @Input({ required: true, alias: 'csaladtag' }) set csaladtagInput(
-    value: Csaladtag
-  ) {
-    this._csaladtag.set(value);
+  get isFerfi() {
+    return this.csaladtag.nem == Nem.Ferfi;
   }
 
-  nagyNev = computed(() => this._csaladtag()!.nev.toUpperCase());
+  @Input({ required: true }) csaladtag!: Csaladtag;
 }
