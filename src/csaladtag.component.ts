@@ -2,13 +2,14 @@ import { NgIf, NgStyle } from '@angular/common';
 import { Component, computed, Input, signal } from '@angular/core';
 
 import { Csaladtag, Nem } from './csaladtag.model';
+import { IsFerfiPipe } from './isFerfi.pipe';
 
 @Component({
   selector: 'csf-csaladtag',
   standalone: true,
-  imports: [NgIf, NgStyle],
+  imports: [NgIf, NgStyle, IsFerfiPipe],
   template: `
-    <button [ngStyle]="{'background-color': isFerfi ? 'blue' : '#FF1493' }" class="csaladtag">
+    <button [ngStyle]="{'background-color': (csaladtag.nem | isFerfi) ? 'blue' : '#FF1493' }" class="csaladtag">
       {{ csaladtag.nev }} ({{ csaladtag.kor }})
     </button>
   `,
@@ -25,9 +26,5 @@ import { Csaladtag, Nem } from './csaladtag.model';
   ],
 })
 export class CsaladtagComponent {
-  get isFerfi() {
-    return this.csaladtag.nem == Nem.Ferfi;
-  }
-
   @Input({ required: true }) csaladtag!: Csaladtag;
 }
