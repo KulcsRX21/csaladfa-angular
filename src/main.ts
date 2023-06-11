@@ -11,15 +11,15 @@ import { GeneracioComponent } from './generacio.component';
   template: `
     <div class="center">
       <h1>Az én családfám</h1>
-      <csf-generacio [generacio]="0"/>
     </div>
+    <csf-generacio [generacio]="0"/>
   `,
   styles: [
     `.center {
         display: flex;
         justify-content: center;
     }`,
-  ],
+  ]
 })
 export class App {}
 

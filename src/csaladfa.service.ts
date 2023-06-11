@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, tap } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { Csaladtag } from './csaladtag.model';
 
 @Injectable({ providedIn: 'root' })
 export class CsaladfaService {
   getCsaladtagokByGeneracio(generacio: number): Observable<Csaladtag[]> {
-    return of(csaladtagok.filter((cs: Csaladtag) => cs.generacio == generacio)).pipe(
-      tap(() => console.log('Getting csaladtagok by ${generacio}'))
-    );
+    return of(csaladtagok.filter((cs: Csaladtag) => cs.generacio == generacio));
   }
 }
 
@@ -46,5 +44,5 @@ const csaladtagok: Csaladtag[] = [
     generacio: 1,
     apa: 1,
     anya: 2,
-  }
+  },
 ];

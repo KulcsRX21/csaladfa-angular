@@ -1,8 +1,10 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { CsaladfaService } from './csaladfa.service';
 import { CsaladtagComponent } from './csaladtag.component';
+import { Csaladtag } from './csaladtag.model';
 
 @Component({
   selector: 'csf-generacio',
@@ -22,12 +24,16 @@ import { CsaladtagComponent } from './csaladtag.component';
         display: flex;
         justify-content: center;
     }`,
-  ],
+  ]
 })
-export class GeneracioComponent {
+export class GeneracioComponent implements OnInit {  
   @Input({ required: true }) generacio!: number;
 
-  csaladtagok$ = inject(CsaladfaService).getCsaladtagokByGeneracio(
-    this.generacio
-  );
+  csaladtagok$!: Observable<Csaladtag[]>;
+
+  constructor(private csaladfaService: CsaladfaService) {}
+
+  ngOnInit() {
+    this.csaladtagok$ = this.csaladfaService.getCsaladtagokByGeneracio(this.generacio);
+  }
 }
