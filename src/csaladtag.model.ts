@@ -1,11 +1,11 @@
 export interface Csaladtag {
   id: number;
   nev: string;
-  kor: number;
+  szuletesnap: Date;
   nem: Nem;
   generacio: number;
-  apa: number;
-  anya: number;
+  apa?: number;
+  anya?: number;
   par?: number;
 }
 

@@ -3,14 +3,15 @@ import { Component, computed, Input, signal } from '@angular/core';
 
 import { Csaladtag, Nem } from './csaladtag.model';
 import { IsFerfiPipe } from './isFerfi.pipe';
+import { KorPipe } from './kor.pipe';
 
 @Component({
   selector: 'csf-csaladtag',
   standalone: true,
-  imports: [NgIf, NgStyle, IsFerfiPipe],
+  imports: [NgIf, NgStyle, IsFerfiPipe, KorPipe],
   template: `
     <button [ngStyle]="{'background-color': (csaladtag.nem | isFerfi) ? 'blue' : '#FF1493' }" class="csaladtag">
-      {{ csaladtag.nev }} ({{ csaladtag.kor }})
+      {{ csaladtag.nev }} ({{ csaladtag.szuletesnap | kor }})
     </button>
   `,
   styles: [
