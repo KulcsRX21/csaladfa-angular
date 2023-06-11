@@ -19,7 +19,7 @@ import { GeneracioComponent } from './generacio.component';
         display: flex;
         justify-content: center;
     }`,
-  ]
+  ],
 })
 export class App {}
 
